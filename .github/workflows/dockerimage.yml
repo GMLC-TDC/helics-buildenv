@@ -23,4 +23,4 @@ jobs:
         BOOST_VERSION: ${{ matrix.config.boost }}
       run: |
         echo Building Docker image with $COMPILER and Boost $BOOST_VERSION
-        docker build . --file ci-builder/Dockerfile --tag buildenv:${COMPILER}_boost${BOOST_VERSION} --build-arg COMPILER=${COMPILER} --build-arg BOOST_VERSION=${BOOST_VERSION}
+        docker build . --file ci-builder/Dockerfile --tag buildenv:${COMPILER/g++/gcc}_boost${BOOST_VERSION} --build-arg COMPILER=${COMPILER} --build-arg BOOST_VERSION=${BOOST_VERSION}
