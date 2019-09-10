@@ -17,10 +17,17 @@ jobs:
  
     steps:
     - uses: actions/checkout@v1
-    - name: Build the Docker image
+    #-name: Login to Docker Hub
+    # run: docker login
+    - uses: azure/container-actions/docker-login@master
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Build and Push the Docker image
       env:
         COMPILER: ${{ matrix.config.compiler }}
         BOOST_VERSION: ${{ matrix.config.boost }}
       run: |
         echo Building Docker image with $COMPILER and Boost $BOOST_VERSION
-        docker build . --file ci-builder/Dockerfile --tag buildenv:${COMPILER/g++/gcc}_boost${BOOST_VERSION} --build-arg COMPILER=${COMPILER} --build-arg BOOST_VERSION=${BOOST_VERSION}
+        docker build . --file ci-builder/Dockerfile --tag helics/buildenv:${COMPILER/g++/gcc}_boost-${BOOST_VERSION} --build-arg COMPILER=${COMPILER} --build-arg BOOST_VERSION=${BOOST_VERSION}
+        docker push helics/buildenv:${COMPILER/g++/gcc}_boost-${BOOST_VERSION}
