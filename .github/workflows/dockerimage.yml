@@ -19,7 +19,8 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build the Docker image
       env:
+        COMPILER: ${{ matrix.config.compiler }}
         BOOST_VERSION: ${{ matrix.config.boost }}
       run: |
-        echo Using $BOOST_VERSION
-      #docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+        echo Building Docker image with $COMPILER and Boost $BOOST_VERSION
+        docker build . --file ci-builder/Dockerfile --tag buildenv:${COMPILER}_boost${BOOST_VERSION} --build-arg COMPILER=${COMPILER} --build-arg BOOST_VERSION=${BOOST_VERSION}
