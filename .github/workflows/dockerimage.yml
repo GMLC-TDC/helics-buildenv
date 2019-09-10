@@ -9,9 +9,9 @@ jobs:
     strategy:
       matrix:
         config: [{compiler: g++-4.9, boost: 1.61.0}, {compiler: g++-8, boost: 1.65.0}, {compiler: clang-3.6, boost: 1.58.0}, {compiler: clang-8, boost: 1.65.0}]
-        include:
-          - compiler: g++-4.9
-            boost_version: 1.61.0
+        #include:
+        #  - compiler: g++-4.9
+        #    boost_version: 1.61.0
  
     steps:
     - uses: actions/checkout@v1
