@@ -1,0 +1,22 @@
+name: Docker Image CI
+
+on: [push]
+
+jobs:
+  build:
+    name: Docker build on ${{ matrix.compiler }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        compiler: [g++-4.9, g++-8, clang-3.6, clang-8]
+        include:
+          - compiler: g++-4.9
+            boost_version: 1.61.0
+ 
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build the Docker image
+      env:
+        BOOST_VERSION: ${{ matrix.boost_version }}
+      run: echo Using $BOOST_VERSION
+      #docker build . --file Dockerfile --tag my-image-name:$(date +%s)
