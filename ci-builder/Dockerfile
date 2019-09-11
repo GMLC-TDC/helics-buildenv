@@ -62,9 +62,9 @@ RUN cp /etc/apt/sources.list /etc/apt/sources.list.bak; \
 
 # Compile and install MPICH (Ubuntu package depends on g++, OpenMPI package doesn't)
 ARG MPICH_VERSION=3.2
-RUN MPICH_VERSION_STR=mpich-$(echo $MPICH_VERSION | sed -e 's/\./_/g') ; \
+RUN MPICH_VERSION_STR=mpich-$(echo $MPICH_VERSION | sed -e 's/\./_/g'); \
     if [ "${MPI_VARIANT-}" != mpich ]; then exit; fi; \
-    mkdir /mpich_build && cd /mpich_build ; \
+    mkdir /mpich_build && cd /mpich_build; \
     curl -sSL -O http://www.mpich.org/static/downloads/${MPICH_VERSION}/${MPICH_VERSION_STR}.tar.gz; \
     tar xfz ${MPICH_VERSION_STR}.tar.gz;\
     cd ${MPICH_VERSION_STR}; \
@@ -84,12 +84,12 @@ RUN MPICH_VERSION_STR=mpich-$(echo $MPICH_VERSION | sed -e 's/\./_/g') ; \
 
 # Compile and install Boost
 ARG BOOST_VERSION=1.65.0
-RUN BOOST_VERSION_STR=boost_$(echo $BOOST_VERSION | sed -e 's/\./_/g') ; \
-    mkdir /boost_build && cd /boost_build ; \
+RUN BOOST_VERSION_STR=boost_$(echo $BOOST_VERSION | sed -e 's/\./_/g'); \
+    mkdir /boost_build && cd /boost_build; \
     curl -sSL -O http://downloads.sourceforge.net/project/boost/boost/${BOOST_VERSION}/${BOOST_VERSION_STR}.tar.gz; \
     tar xfz ${BOOST_VERSION_STR}.tar.gz; \
     cd ${BOOST_VERSION_STR}; \
-    toolset=$(echo ${COMPILER%%-*} | sed -e 's/g++/gcc/') ; \
+    toolset=$(echo ${COMPILER%%-*} | sed -e 's/g++/gcc/'); \
     ./bootstrap.sh --with-libraries=test --with-toolset=${toolset}; \
     ./b2 install; \
     cd / && rm -rf /boost_build;
