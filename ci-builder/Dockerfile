@@ -23,6 +23,8 @@ RUN apt-get update; \
 # gcc 4 and 5 are not available on disco
 # Package install that may depend on arguments
 ARG COMPILER=g++-4.9
+# The MPI_VARIANT can be either "mpich" or "openmpi"
+ARG MPI_VARIANT
 RUN cp /etc/apt/sources.list /etc/apt/sources.list.bak; \
     distro="disco" ; \
     case $COMPILER in g??-4*) distro="xenial";; g??-5*) distro="xenial";; clang-3*) distro="xenial";; clang-4*) distro="xenial";; clang-5*) distro="xenial";; esac; \
@@ -31,9 +33,11 @@ RUN cp /etc/apt/sources.list /etc/apt/sources.list.bak; \
         echo "deb http://dk.archive.ubuntu.com/ubuntu/ $distro main" >> /etc/apt/sources.list ; \
         echo "deb http://dk.archive.ubuntu.com/ubuntu/ $distro universe" >> /etc/apt/sources.list ; \
     ;; esac; \
+    if [ "${MPI_VARIANT-}" = openmpi ]; then MPI_PACKAGE="libopenmpi-dev"; fi; \
     apt-get update; \
     apt-get install -y --no-install-suggests --no-install-recommends \
     	${COMPILER} \
+	${MPI_PACKAGE} \
     ; \
     case $COMPILER in \
         g??-*) \
@@ -56,26 +60,27 @@ RUN cp /etc/apt/sources.list /etc/apt/sources.list.bak; \
     apt-get clean; \
     rm -rf /var/lib/apt/lists/*
 
-# Compile and install MPICH (depends on g++, OpenMPI Ubuntu package doesn't)
-#ARG MPICH_VERSION=3.2
-#WORKDIR /mpich_build
-#RUN MPICH_VERSION_STR=mpich-$(echo $MPICH_VERSION | sed -e 's/\./_/g') ; \
-#    curl -sSL -O http://www.mpich.org/static/downloads/${MPICH_VERSION}/${MPICH_VERSION_STR}.tar.gz; \
-#    tar xfz ${MPICH_VERSION_STR}.tar.gz
-#    cd ${MPICH_VERSION_STR}; \
-#    mkdir -p build && cd build; \
-#    ./configure \
-#        --disable-dependency-tracking \
-#        --enable-fast=yes \
-#        --enable-g=none \
-#        --enable-timing=none \
-#        --enable-shared \
-#        --disable-static \
-#        --disable-java \
-#        --disable-fortran \
-#        --enable-threads=serialized; \
-#    make install;
-#    rm -rf /mpich_build;
+# Compile and install MPICH (Ubuntu package depends on g++, OpenMPI package doesn't)
+ARG MPICH_VERSION=3.2
+RUN MPICH_VERSION_STR=mpich-$(echo $MPICH_VERSION | sed -e 's/\./_/g') ; \
+    if [ "${MPI_VARIANT-}" != mpich ]; then exit; fi; \
+    mkdir /mpich_build && cd /mpich_build ; \
+    curl -sSL -O http://www.mpich.org/static/downloads/${MPICH_VERSION}/${MPICH_VERSION_STR}.tar.gz; \
+    tar xfz ${MPICH_VERSION_STR}.tar.gz
+    cd ${MPICH_VERSION_STR}; \
+    mkdir -p build && cd build; \
+    ./configure \
+        --disable-dependency-tracking \
+        --enable-fast=yes \
+        --enable-g=none \
+        --enable-timing=none \
+        --enable-shared \
+        --disable-static \
+        --disable-java \
+        --disable-fortran \
+        --enable-threads=serialized; \
+    make install;
+    cd / && rm -rf /mpich_build;
 
 # Compile and install Boost
 ARG BOOST_VERSION=1.65.0
