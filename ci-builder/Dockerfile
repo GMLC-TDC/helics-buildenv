@@ -66,7 +66,7 @@ RUN MPICH_VERSION_STR=mpich-$(echo $MPICH_VERSION | sed -e 's/\./_/g') ; \
     if [ "${MPI_VARIANT-}" != mpich ]; then exit; fi; \
     mkdir /mpich_build && cd /mpich_build ; \
     curl -sSL -O http://www.mpich.org/static/downloads/${MPICH_VERSION}/${MPICH_VERSION_STR}.tar.gz; \
-    tar xfz ${MPICH_VERSION_STR}.tar.gz
+    tar xfz ${MPICH_VERSION_STR}.tar.gz;\
     cd ${MPICH_VERSION_STR}; \
     mkdir -p build && cd build; \
     ./configure \
@@ -79,7 +79,7 @@ RUN MPICH_VERSION_STR=mpich-$(echo $MPICH_VERSION | sed -e 's/\./_/g') ; \
         --disable-java \
         --disable-fortran \
         --enable-threads=serialized; \
-    make install;
+    make install; \
     cd / && rm -rf /mpich_build;
 
 # Compile and install Boost
