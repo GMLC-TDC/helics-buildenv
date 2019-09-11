@@ -93,8 +93,3 @@ RUN BOOST_VERSION_STR=boost_$(echo $BOOST_VERSION | sed -e 's/\./_/g') ; \
     ./bootstrap.sh --with-libraries=test --with-toolset=${toolset}; \
     ./b2 install; \
     cd / && rm -rf /boost_build;
-
-# ENV HOME /home/<usr>
-# RUN groupadd -r <grp> && useradd -r -g <grp> <usr> \
-#     && mkdir -p /home/<usr>/mnt_src_dir_here && chown -R <usr>:<grp> /home/<usr>
-# USER <usr>
