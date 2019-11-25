@@ -1,5 +1,8 @@
-name: Docker Image CI
-on: [push]
+name: CI Docker Images
+on:
+  push:
+    paths:
+      - ci-builder/**
 
 jobs:
   build:
