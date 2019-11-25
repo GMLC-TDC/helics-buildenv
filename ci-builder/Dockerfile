@@ -1,7 +1,7 @@
 ARG BASE_IMAGE=ubuntu:19.04
 FROM $BASE_IMAGE
 
-# Packages that aren't likely to change frequently
+# Packages that aren't likely to change frequently first to take advantage of layer caching
 RUN apt-get update; \
     apt-get install -y --no-install-suggests --no-install-recommends \
         gnupg1 \
