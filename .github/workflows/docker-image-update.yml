@@ -2,8 +2,8 @@ name: Update Docker Images
 on:
   push:
     paths:
-      - **/Dockerfile
-      - !ci-builder/**
+      - '**/Dockerfile'
+      - '!ci-builder/**'
 
 jobs:
   build:
