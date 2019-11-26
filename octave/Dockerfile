@@ -12,7 +12,7 @@ RUN apt update && apt install -y --no-install-recommends libzmq5 octave liboctav
 ENV PYTHONPATH /usr/local/python
 
 # Python must be installed after the PYTHONPATH is set above for it to
-# recognize and import libhelicsSharedLib.so.
+# recognize and import libhelicsSharedLib.so
 RUN apt install -y --no-install-recommends python3-dev \
   && apt-get clean
 
