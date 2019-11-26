@@ -17,4 +17,4 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Build and push updated Docker containers
-      run: .github/workflows/scripts/build-changed-dockerfiles.sh
+      run: .github/workflows/scripts/build-changed-dockerfiles.sh "${{ github.sha }}"
