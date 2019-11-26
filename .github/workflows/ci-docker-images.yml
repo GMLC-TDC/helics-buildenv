@@ -2,7 +2,7 @@ name: Build CI Docker Images
 on:
   push:
     paths:
-      - ci-builder/**
+      - ci-builders/**
 
 jobs:
   build:
@@ -31,5 +31,5 @@ jobs:
         BOOST_VERSION: ${{ matrix.config.boost }}
       run: |
         echo Building Docker image with $COMPILER and Boost $BOOST_VERSION
-        docker build . --file ci-builder/Dockerfile --tag helics/buildenv:${COMPILER/g++/gcc}_boost-${BOOST_VERSION} --build-arg COMPILER=${COMPILER} --build-arg BOOST_VERSION=${BOOST_VERSION}
+        docker build . --file ci-builders/Dockerfile --tag helics/buildenv:${COMPILER/g++/gcc}_boost-${BOOST_VERSION} --build-arg COMPILER=${COMPILER} --build-arg BOOST_VERSION=${BOOST_VERSION}
         docker push helics/buildenv:${COMPILER/g++/gcc}_boost-${BOOST_VERSION}
