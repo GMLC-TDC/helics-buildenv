@@ -1,4 +1,4 @@
-name: CI Docker Images
+name: Build CI Docker Images
 on:
   push:
     paths:
