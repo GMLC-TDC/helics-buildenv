@@ -8,6 +8,7 @@ Each Dockerfile has its own directory that contains all the scripts needed to bu
 
 - *builder*: Creates an Ubuntu 19.10 image with the default ZMQ, Boost, CMake, git, and g++ packages.
 - *ci-builders*: Creates Ubuntu 19.04 images with several compiler, Boost, and MPI versions. Arguments taken are COMPILER (e.g. gcc-4.9), MPI_VARIANT, MPICH_VERSION, and BOOST_VERSION.
+- *clang-format*: An Alpine image with the tools needed to run clang-format installed.
 - *interface-gen*: Creates a Fedora 31 image with SWIG 4.0.1 and SWIG Matlab (https://github.com/jaeandersson/swig) installed.
 - *octave*: Creates an Ubuntu 18.04 image with Octave 4.2.2 installed.
 - *sanitizers*: Creates an Ubuntu 19.10 image with clang sanitizers installed. The current image includes address, memory, and thread sanitizers with clang 9.
