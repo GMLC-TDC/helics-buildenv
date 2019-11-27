@@ -13,7 +13,7 @@ Each Dockerfile has its own directory that contains all the scripts needed to bu
 - *sanitizers*: Creates an Ubuntu 19.10 image with clang sanitizers installed. The current image includes address, memory, and thread sanitizers with clang 9.
 
 ## Release
-HELICS is distributed under the terms of the BSD-3 clause license. All new
+helics-buildenv is distributed under the terms of the BSD-3 clause license. All new
 contributions must be made under this license. [LICENSE](LICENSE)
 
 SPDX-License-Identifier: BSD-3-Clause
