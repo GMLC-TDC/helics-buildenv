@@ -6,6 +6,6 @@ RUN apt update && apt install -y \
   cmake git libboost-dev && apt-get clean\
   && ln -s /usr/bin/llvm-symbolizer-8 /usr/bin/llvm-symbolizer\
   && ln -s /usr/bin/clang++-8 /usr/bin/clang++\
-  && ln -s /usr/bin/clang-8 /usr/bin/clang\
+  && ln -s /usr/bin/clang-8 /usr/bin/clang
 
 WORKDIR /root/develop
