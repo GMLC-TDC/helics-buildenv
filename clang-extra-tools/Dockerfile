@@ -5,6 +5,7 @@ RUN apk add --no-cache \
     git \
     build-base \
     cmake \
+    clang \
     clang-extra-tools \
     boost-dev \
     zeromq-dev
