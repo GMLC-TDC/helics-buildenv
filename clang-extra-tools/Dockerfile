@@ -7,4 +7,4 @@ RUN apk add --no-cache \
     cmake \
     clang-extra-tools \
     boost-dev \
-    libzmq-dev
+    zeromq-dev
