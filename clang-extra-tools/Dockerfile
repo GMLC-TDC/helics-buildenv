@@ -1,10 +1,10 @@
-FROM alpine:latest
+FROM alpine:edge
 
 RUN apk add --no-cache \
     bash \
     git \
     build-base \
     cmake \
-    clang-extra-tools@edge \
+    clang-extra-tools \
     boost-dev \
-    libzmq-dev@edge
+    libzmq-dev
