@@ -5,7 +5,6 @@ RUN apk add --no-cache \
     git \
     build-base \
     cmake \
-    clang \
-    clang-extra-tools \
+    clang-extra-tools@edge \
     boost-dev \
-    libzmq-dev
+    libzmq-dev@edge
