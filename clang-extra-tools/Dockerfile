@@ -2,6 +2,7 @@ FROM alpine:edge
 
 RUN apk add --no-cache \
     bash \
+    jq \
     git \
     build-base \
     python3 \
