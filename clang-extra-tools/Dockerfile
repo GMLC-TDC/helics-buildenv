@@ -2,6 +2,7 @@ FROM alpine:edge
 
 RUN apk add --no-cache \
     bash \
+    curl \
     jq \
     git \
     build-base \
