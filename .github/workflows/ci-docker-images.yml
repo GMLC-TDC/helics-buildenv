@@ -12,9 +12,9 @@ jobs:
       matrix:
         config: [
           {compiler: g++-4.9, boost: 1.61.0},
-          {compiler: g++-8, boost: 1.65.0},
+          {compiler: g++-9, boost: 1.72.0},
           {compiler: clang-3.6, boost: 1.58.0},
-          {compiler: clang-8, boost: 1.65.0},
+          {compiler: clang-9, boost: 1.72.0},
         ]
  
     steps:
