@@ -18,7 +18,7 @@ do
     if [ "$cfile" = "Dockerfile" ]; then
         echo "Building updated Dockerfile: $f"
         cd "${cpath}" || continue
-        docker build . --tag "helics/buildenv:${cdir}"
+        docker build . --tag "helics/buildenv:${cdir}" || exit $?
         docker push "helics/buildenv:${cdir}"
         cd - || continue
     fi
