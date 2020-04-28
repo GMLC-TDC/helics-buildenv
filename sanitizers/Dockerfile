@@ -44,7 +44,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 LABEL maintainer="helicsdevelopers@helics.org"
 
-# updated 2020-04-28
+# last updated 2020-04-28
 
 RUN apt update && apt install -y \
   libboost-dev \
