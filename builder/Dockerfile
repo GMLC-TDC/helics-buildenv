@@ -7,4 +7,6 @@ RUN apt update && apt install -y \
 
 RUN apt-get install -y --no-install-recommends pkg-config libboost-dev make && apt-get clean
 
+LABEL maintainer="helicsdevelopers@helics.org"
+
 WORKDIR /root/develop
