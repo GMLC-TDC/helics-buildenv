@@ -1,5 +1,9 @@
 FROM ubuntu:20.04 as clang9-builder
 
+ENV DEBIAN_FRONTEND=noninteractive
+
+LABEL maintainer="helicsdevelopers@helics.org"
+
 RUN apt update && apt install -y \
   libzmq5-dev build-essential\
   clang-9 libc++-9-dev libc++abi-9-dev libstdc++-9-dev\
