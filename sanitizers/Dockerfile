@@ -4,21 +4,19 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && apt install -y \
   python3 \
-  make clang-10 cmake git wget subversion libc++-10-dev libc++abi-10-dev
+  make clang-10 cmake git wget libc++-10-dev libc++abi-10-dev
 
 RUN ln -s /usr/bin/clang-10 /usr/bin/clang && ln -s /usr/bin/clang++-10 /usr/bin/clang++
 
 WORKDIR /root/develop
 
-RUN svn co http://llvm.org/svn/llvm-project/llvm/trunk llvm
-RUN (cd llvm/projects && svn co http://llvm.org/svn/llvm-project/libcxx/trunk libcxx)
-RUN (cd llvm/projects && svn co http://llvm.org/svn/llvm-project/libcxxabi/trunk libcxxabi)
+RUN git clone https://github.com/llvm/llvm-project.git
 
 # Sets the number of threads for make to use
 ARG MAKE_PARALLEL
 
 # Build the ASAN libraries
-RUN mkdir libcxx_asan_build && cd libcxx_asan_build &&  cmake ../llvm -DCMAKE_BUILD_TYPE=Release -DLLVM_USE_SANITIZER=Address -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_FLAGS=-stdlib=libc++
+RUN mkdir libcxx_asan_build && cd libcxx_asan_build &&  cmake ../llvm -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_PROJECTS="libcxx;libcxxabi" -DLLVM_USE_SANITIZER=Address -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_FLAGS=-stdlib=libc++
 RUN cd libcxx_asan_build && make cxx -j${MAKE_PARALLEL:-2}
 
 RUN mkdir -p /root/develop/libcxx_asan/include && cp -r /root/develop/libcxx_asan_build/include/* /root/develop/libcxx_asan/include/
