@@ -1,5 +1,7 @@
 FROM ubuntu:20.04 as builder
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt update && apt install -y \
   python3 \
   make clang-10 cmake git wget subversion libc++-10-dev libc++abi-10-dev
@@ -37,6 +39,12 @@ RUN mkdir -p /root/develop/libcxx_tsan/include && cp -r /root/develop/libcxx_tsa
 RUN mkdir -p /root/develop/libcxx_tsan/lib && cp -r /root/develop/libcxx_tsan_build/lib/* /root/develop/libcxx_tsan/lib/
 
 FROM ubuntu:20.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+LABEL maintainer="helicsdevelopers@helics.org"
+
+# updated 2020-04-28
 
 RUN apt update && apt install -y \
   libboost-dev \
