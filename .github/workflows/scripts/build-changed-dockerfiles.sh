@@ -7,6 +7,7 @@ fi
 
 # Go through the list of files that have changed in the last commit
 commit_sha=$1
+rv=0
 for f in $(git diff --name-only "${commit_sha}" "${commit_sha}~1");
 do
     # Get the changed file name, path, and containing folder name
@@ -18,8 +19,10 @@ do
     if [ "$cfile" = "Dockerfile" ]; then
         echo "Building updated Dockerfile: $f"
         cd "${cpath}" || continue
-        docker build . --tag "helics/buildenv:${cdir}"
-        docker push "helics/buildenv:${cdir}"
+        docker build . --tag "helics/buildenv:${cdir}" || rv=1
+        docker push "helics/buildenv:${cdir}" || rv=1
         cd - || continue
     fi
 done
+
+exit $rv
