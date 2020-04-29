@@ -46,7 +46,7 @@ LABEL maintainer="helicsdevelopers@helics.org"
 
 RUN apt update && apt install -y \
   libboost-dev \
-  clang-10 cmake make git && apt-get clean && ln -s /usr/bin/llvm-symbolizer-10 /usr/bin/llvm-symbolizer && ln -s /usr/bin/clang-10 /usr/bin/clang && ln -s /usr/bin/clang++-10 /usr/bin/clang++
+  clang-10 cmake make git libc++-10-dev libc++abi-10-dev && apt-get clean && ln -s /usr/bin/llvm-symbolizer-10 /usr/bin/llvm-symbolizer && ln -s /usr/bin/clang-10 /usr/bin/clang && ln -s /usr/bin/clang++-10 /usr/bin/clang++
 
 # Copy the built libraries from the builder images
 COPY --from=builder /root/develop/libcxx_asan /root/develop/libcxx_asan
