@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && apt install -y \
   python3 \
-  make clang-10 cmake git wget
+  make clang-10 cmake git wget libc++-10-dev libc++abi-10-dev
 
 RUN ln -s /usr/bin/clang-10 /usr/bin/clang && ln -s /usr/bin/clang++-10 /usr/bin/clang++
 
