@@ -2,15 +2,14 @@ FROM ubuntu:20.04 as builder
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-LABEL maintainer="helicsdevelopers@helics.org"
-
-# updated 2020-04-28
-
 RUN apt update && apt install -y \
-  libzmq5-dev\
-  g++ gcc\
-  cmake git
+  libzmq5-dev libboost-filesystem1.71-dev \
+  libboost-system1.71-dev libboost-test1.71-dev libboost-date-time1.71-dev \
+  g++ gcc libsuitesparse-dev \
+  cmake git wget && apt-get install -y --no-install-recommends \
+  pkg-config libboost-1.71-dev make && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-RUN apt-get install -y --no-install-recommends pkg-config libboost-dev make && apt-get clean
+LABEL maintainer="helicsdevelopers@helics.org"
+LABEL date="2020-05-08"
 
 WORKDIR /root/develop
