@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt install -y \
   libzmq5-dev build-essential libboost-filesystem1.71-dev \
   libboost-system1.71-dev libboost-test1.71-dev libboost-date-time1.71-dev \
-  clang-9 libc++-9-dev libc++abi-9-dev libstdc++-9-dev\
+  clang-9 libc++-9-dev libc++abi-9-dev libstdc++-9-dev libsuitesparse-dev \
   cmake git wget libboost1.71-dev ca-certificates \
   && apt-get clean && rm -rf /var/lib/apt/lists/* \
   && ln -s /usr/bin/llvm-symbolizer-9 /usr/bin/llvm-symbolizer\
