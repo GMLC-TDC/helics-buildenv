@@ -16,6 +16,6 @@ RUN apk add --no-cache \
     boost-system \
     boost-date_time \
     boost-unit_test_framework \ 
-    suitesparse \
+    suitesparse-dev \
     wget \
     zeromq-dev
