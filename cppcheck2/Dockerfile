@@ -28,6 +28,6 @@ RUN apt update && apt install -y libz3-4 libpcre3 \
 LABEL maintainer="helicsdevelopers@helics.org"
 LABEL date="2020-05-28"
 
-# Copy the swig-matlab install from the builder image stage
+# Copy cppcheck to the install location
 COPY --from=builder /usr/local/share/Cppcheck /usr/local/share/Cppcheck
 COPY --from=builder /usr/local/bin/cppcheck /usr/local/bin/cppcheck
