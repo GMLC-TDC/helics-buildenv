@@ -14,6 +14,7 @@ RUN apt update && apt install -y \
 ENV CC=/usr/bin/clang
 ENV CXX=/usr/bin/clang++
 
+
 LABEL maintainer="helicsdevelopers@helics.org"
 LABEL date="2020-07-31"
 
