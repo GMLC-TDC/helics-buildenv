@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt install -y \
   libzmq5-dev libboost-filesystem1.71-dev \
   libboost-system1.71-dev libboost-test1.71-dev libboost-date-time1.71-dev \
-  g++-10 gcc-10 libsuitesparse-dev\
+  g++-10 gcc-10 mpi-default-dev libsuitesparse-dev\
   cmake git wget swig && apt-get install -y --no-install-recommends \
   pkg-config libboost1.71-dev make && apt-get clean && rm -rf /var/lib/apt/lists/*
 
@@ -16,6 +16,6 @@ RUN rm /usr/bin/gcc && ln -s /usr/bin/gcc-10 /usr/bin/gcc \
   && rm /usr/bin/gcc-ranlib && ln -s /usr/bin/gcc-ranlib-10 /usr/bin/gcc-ranlib
   
 LABEL maintainer="helicsdevelopers@helics.org"
-LABEL date="2020-05-08"
+LABEL date="2020-07-31"
 
 WORKDIR /root/develop

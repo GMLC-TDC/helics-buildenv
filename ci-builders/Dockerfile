@@ -1,4 +1,4 @@
-ARG BASE_IMAGE=ubuntu:19.04
+ARG BASE_IMAGE=ubuntu:18.04
 FROM $BASE_IMAGE
 
 # Packages that aren't likely to change frequently first to take advantage of layer caching

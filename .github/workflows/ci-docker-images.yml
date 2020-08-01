@@ -11,10 +11,10 @@ jobs:
     strategy:
       matrix:
         config: [
-          {compiler: g++-4.9, boost: 1.61.0},
-          {compiler: g++-9, boost: 1.72.0},
-          {compiler: clang-3.6, boost: 1.58.0},
-          {compiler: clang-9, boost: 1.72.0},
+                {compiler: g++-7, boost: 1.65.0},
+                #{compiler: g++-10, boost: 1.73.0},
+                {compiler: clang-5, boost: 1.65.0},
+                #{compiler: clang-10, boost: 1.73.0},
         ]
  
     steps:
