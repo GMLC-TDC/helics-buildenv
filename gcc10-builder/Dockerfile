@@ -6,7 +6,7 @@ RUN apt update && apt install -y \
   libzmq5-dev libboost-filesystem1.71-dev \
   libboost-system1.71-dev libboost-test1.71-dev libboost-date-time1.71-dev \
   g++-10 gcc-10 libsuitesparse-dev\
-  cmake git wget && apt-get install -y --no-install-recommends \
+  cmake git wget swig && apt-get install -y --no-install-recommends \
   pkg-config libboost1.71-dev make && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN rm /usr/bin/gcc && ln -s /usr/bin/gcc-10 /usr/bin/gcc \
