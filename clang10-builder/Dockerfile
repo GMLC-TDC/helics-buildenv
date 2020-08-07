@@ -3,7 +3,7 @@ FROM ubuntu:20.04 as clang10-builder
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && apt install -y \
-  libzmq5-dev build-essential \
+  default-jre python3 libzmq5-dev build-essential \
   clang-10 libc++-10-dev libc++abi-10-dev libstdc++-10-dev\
   cmake git wget swig mpich libboost-dev ca-certificates \
   && apt-get clean && rm -rf /var/lib/apt/lists/* \
