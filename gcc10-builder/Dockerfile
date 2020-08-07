@@ -11,7 +11,7 @@ RUN apt update && apt install -y \
   && pip3 install pytest
 
 RUN rm /usr/bin/gcc && ln -s /usr/bin/gcc-10 /usr/bin/gcc \
-  && ln -s /usr/bin/g++-10 /usr/bin/g++ \
+  && rm /usr/bin/g++ && ln -s /usr/bin/g++-10 /usr/bin/g++ \
   && rm /usr/bin/gcc-ar && ln -s /usr/bin/gcc-ar-10 /usr/bin/gcc-ar \
   && rm /usr/bin/gcc-nm && ln -s /usr/bin/gcc-nm-10 /usr/bin/gcc-nm \
   && rm /usr/bin/gcc-ranlib && ln -s /usr/bin/gcc-ranlib-10 /usr/bin/gcc-ranlib
