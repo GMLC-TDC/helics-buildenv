@@ -3,7 +3,7 @@ FROM ubuntu:18.04 as clang5-builder
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && apt install -y \
-  default-jre python3 libzmq5-dev build-essential \
+  default-jdk python3 libzmq5-dev build-essential \
   libboost-filesystem1.65-dev\
   libboost-system1.65-dev libboost-test1.65-dev libboost-date-time1.65-dev\
   clang-5.0 \
