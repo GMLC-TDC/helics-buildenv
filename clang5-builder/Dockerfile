@@ -12,7 +12,6 @@ RUN apt update && apt install -y \
   && ln -s /usr/bin/clang++-5.0 /usr/bin/clang++\
   && ln -s /usr/bin/clang-5.0 /usr/bin/clang
 
-
 ENV CC=/usr/bin/clang
 ENV CXX=/usr/bin/clang++
 
