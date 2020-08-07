@@ -3,7 +3,7 @@ FROM ubuntu:20.04 as builder
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && apt install -y \
-  default-jdk python3 libzmq5-dev libboost-filesystem1.71-dev \
+  default-jdk python3-dev libzmq5-dev libboost-filesystem1.71-dev \
   libboost-system1.71-dev libboost-test1.71-dev libboost-date-time1.71-dev \
   g++-10 gcc-10 mpi-default-dev libsuitesparse-dev\
   cmake git wget swig && apt-get install -y --no-install-recommends \
