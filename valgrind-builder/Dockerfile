@@ -1,3 +1,4 @@
+# Used for valgrind runs
 FROM ubuntu:20.04 as builder
 
 ENV DEBIAN_FRONTEND=noninteractive
