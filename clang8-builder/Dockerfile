@@ -17,6 +17,4 @@ ENV CC=/usr/bin/clang
 ENV CXX=/usr/bin/clang++
 
 LABEL maintainer="helicsdevelopers@helics.org"
-LABEL date="2020-05-28"
-
-WORKDIR /root/develop
+LABEL date="2021-03-05"
