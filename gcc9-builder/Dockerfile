@@ -10,6 +10,4 @@ RUN apt update && apt install -y \
   pkg-config libboost1.71-dev make && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 LABEL maintainer="helicsdevelopers@helics.org"
-LABEL date="2020-06-03"
-
-WORKDIR /root/develop
+LABEL date="2021-03-08"
