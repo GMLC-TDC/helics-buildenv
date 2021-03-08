@@ -7,5 +7,3 @@ RUN apt update && apt install -y \
   && ln -s /usr/bin/llvm-symbolizer-7 /usr/bin/llvm-symbolizer\
   && ln -s /usr/bin/clang++-7 /usr/bin/clang++\
   && ln -s /usr/bin/clang-7 /usr/bin/clang
-
-WORKDIR /root/develop
