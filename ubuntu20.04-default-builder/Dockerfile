@@ -13,6 +13,4 @@ RUN apt update && apt install -y \
   && rm -rf /var/lib/apt/lists/*
 
 LABEL maintainer="helicsdevelopers@helics.org"
-LABEL date="2021-02-05"
-
-WORKDIR /root/develop
+LABEL date="2021-03-08"
