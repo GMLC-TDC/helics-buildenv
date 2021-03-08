@@ -16,6 +16,4 @@ RUN rm /usr/bin/gcc && ln -s /usr/bin/gcc-8 /usr/bin/gcc \
   && rm /usr/bin/gcc-ranlib && ln -s /usr/bin/gcc-ranlib-8 /usr/bin/gcc-ranlib
 
 LABEL maintainer="helicsdevelopers@helics.org"
-LABEL date="2020-05-08"
-
-WORKDIR /root/develop
+LABEL date="2021-03-08"
