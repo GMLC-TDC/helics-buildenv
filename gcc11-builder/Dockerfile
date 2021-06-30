@@ -1,11 +1,20 @@
-FROM fedora:34 as builder
+FROM ubuntu:20.04 as builder
 
-RUN dnf -y update && dnf -y install \
-  zeromq-devel boost-filesystem boost-devel \
-  boost-system boost-test boost-date-time \
-  gcc gcc-c++ suitesparse-devel mpich-devel \
-  cmake git wget && dnf clean all \
-  	&& rm -rf /var/cache/yum
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt update && apt install -y \
+  default-jdk python3-dev python3-pip libzmq5-dev libboost-filesystem1.74-dev \
+  libboost-system1.74-dev libboost-test1.74-dev libboost-date-time1.74-dev \
+  g++-11 gcc-11 mpi-default-dev libsuitesparse-dev \
+  cmake git wget swig && apt-get install -y --no-install-recommends \
+  pkg-config libboost1.74-dev make && apt-get clean && rm -rf /var/lib/apt/lists/* \
+  && pip3 install pytest
+
+RUN rm /usr/bin/gcc && ln -s /usr/bin/gcc-11 /usr/bin/gcc \
+  && rm /usr/bin/g++ && ln -s /usr/bin/g++-11 /usr/bin/g++ \
+  && rm /usr/bin/gcc-ar && ln -s /usr/bin/gcc-ar-11 /usr/bin/gcc-ar \
+  && rm /usr/bin/gcc-nm && ln -s /usr/bin/gcc-nm-11 /usr/bin/gcc-nm \
+  && rm /usr/bin/gcc-ranlib && ln -s /usr/bin/gcc-ranlib-11 /usr/bin/gcc-ranlib
   
 LABEL maintainer="helicsdevelopers@helics.org"
-LABEL date="2021-06-15"
+LABEL date="2021-06-30"
