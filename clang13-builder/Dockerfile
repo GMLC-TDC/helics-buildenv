@@ -1,4 +1,4 @@
-FROM ubuntu:20.04 as clang11-builder
+FROM ubuntu:20.04 as clang13-builder
 
 ENV DEBIAN_FRONTEND=noninteractive
 
