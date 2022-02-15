@@ -6,6 +6,7 @@ RUN apt update && apt install -y \
   default-jdk python3-dev python3-pip libzmq5-dev libboost-filesystem-dev \
   libboost-system-dev libboost-test-dev libboost-date-time-dev \
   g++-11 gcc-11 mpi-default-dev libsuitesparse-dev \
+  libsodium-dev libssl-dev openssl \
   cmake git wget swig && apt-get install -y --no-install-recommends \
   pkg-config libboost-dev make && apt-get clean && rm -rf /var/lib/apt/lists/* \
   && pip3 install pytest
