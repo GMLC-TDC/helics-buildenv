@@ -5,6 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt install -y \
   default-jdk python3-dev python3-pip libzmq5-dev build-essential \
   clang-11 libc++-11-dev libc++abi-11-dev libstdc++-11-dev \
+  libsodium-dev libssl-dev openssl \
   cmake git wget swig mpich libboost-dev ca-certificates \
   && apt-get clean && rm -rf /var/lib/apt/lists/* \
   && pip3 install pytest \

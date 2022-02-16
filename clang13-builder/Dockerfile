@@ -7,6 +7,7 @@ RUN apt update && apt install -y software-properties-common wget \
   && add-apt-repository -y "deb http://apt.llvm.org/focal/ llvm-toolchain-focal-13 main" \
   && apt update && apt install -y \
   default-jdk python3-dev python3-pip libzmq5-dev build-essential \
+  libsodium-dev libssl-dev openssl \
   clang-13 libc++-13-dev libc++abi-13-dev libstdc++-10-dev \
   cmake git swig mpich libboost-dev ca-certificates \
   && apt-get clean && rm -rf /var/lib/apt/lists/* \
