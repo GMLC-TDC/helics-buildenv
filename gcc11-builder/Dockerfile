@@ -1,4 +1,4 @@
-FROM ubuntu:21.04 as builder
+FROM ubuntu:21.10 as builder
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -16,6 +16,6 @@ RUN rm /usr/bin/gcc && ln -s /usr/bin/gcc-11 /usr/bin/gcc \
   && rm /usr/bin/gcc-ar && ln -s /usr/bin/gcc-ar-11 /usr/bin/gcc-ar \
   && rm /usr/bin/gcc-nm && ln -s /usr/bin/gcc-nm-11 /usr/bin/gcc-nm \
   && rm /usr/bin/gcc-ranlib && ln -s /usr/bin/gcc-ranlib-11 /usr/bin/gcc-ranlib
-  
+
 LABEL maintainer="helicsdevelopers@helics.org"
-LABEL date="2021-06-30"
+LABEL date="2022-03-11"
