@@ -1,4 +1,4 @@
-FROM ubuntu:21.04 as clang11-builder
+FROM ubuntu:22.04 as clang11-builder
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -17,4 +17,4 @@ ENV CC=/usr/bin/clang
 ENV CXX=/usr/bin/clang++
 
 LABEL maintainer="helicsdevelopers@helics.org"
-LABEL date="2022-03-14"
+LABEL date="2022-05-16"

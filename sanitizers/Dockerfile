@@ -1,12 +1,12 @@
-FROM ubuntu:20.04 as builder
+FROM ubuntu:22.04 as builder
 
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && apt install -y \
   python3 \
-  make clang-10 cmake git wget libc++-10-dev libc++abi-10-dev
+  make clang-12 cmake git wget libc++-12-dev libc++abi-12-dev
 
-RUN ln -s /usr/bin/clang-10 /usr/bin/clang && ln -s /usr/bin/clang++-10 /usr/bin/clang++
+RUN ln -s /usr/bin/clang-12 /usr/bin/clang && ln -s /usr/bin/clang++-12 /usr/bin/clang++
 
 WORKDIR /root/develop
 
@@ -36,17 +36,17 @@ RUN cd libcxx_tsan_build && make cxx -j${MAKE_PARALLEL:-2}
 RUN mkdir -p /root/develop/libcxx_tsan/include && cp -r /root/develop/libcxx_tsan_build/include/* /root/develop/libcxx_tsan/include/
 RUN mkdir -p /root/develop/libcxx_tsan/lib && cp -r /root/develop/libcxx_tsan_build/lib/* /root/develop/libcxx_tsan/lib/
 
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
 LABEL maintainer="helicsdevelopers@helics.org"
 
-# last updated 2020-04-28
+# last updated 2022-05-16
 
 RUN apt update && apt install -y \
   libboost-dev \
-  clang-10 cmake make git && apt-get clean && ln -s /usr/bin/llvm-symbolizer-10 /usr/bin/llvm-symbolizer && ln -s /usr/bin/clang-10 /usr/bin/clang && ln -s /usr/bin/clang++-10 /usr/bin/clang++
+  clang-12 cmake make git && apt-get clean && ln -s /usr/bin/llvm-symbolizer-12 /usr/bin/llvm-symbolizer && ln -s /usr/bin/clang-12 /usr/bin/clang && ln -s /usr/bin/clang++-12 /usr/bin/clang++
 
 # Copy the built libraries from the builder images
 COPY --from=builder /root/develop/libcxx_asan /root/develop/libcxx_asan
