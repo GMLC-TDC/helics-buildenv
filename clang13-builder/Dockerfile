@@ -4,7 +4,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && apt install -y \
   default-jdk python3-dev python3-pip libzmq5-dev build-essential \
-  clang-13 libc++-13-dev libc++abi-13-dev libstdc++-13-dev \
+  clang-13 libc++-13-dev libc++abi-13-dev libstdc++-12-dev \
   libsodium-dev libssl-dev openssl \
   cmake git wget swig mpich libboost-dev ca-certificates \
   && apt-get clean && rm -rf /var/lib/apt/lists/* \
