@@ -10,7 +10,7 @@ RUN ln -s /usr/bin/clang-13 /usr/bin/clang && ln -s /usr/bin/clang++-13 /usr/bin
 
 WORKDIR /root/develop
 
-RUN git clone https://github.com/llvm/llvm-project.git
+RUN git clone -b llvmorg-13.0.1 https://github.com/llvm/llvm-project.git
 
 # Sets the number of threads for make to use
 ARG MAKE_PARALLEL
