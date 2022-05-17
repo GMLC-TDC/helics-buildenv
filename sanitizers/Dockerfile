@@ -4,9 +4,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && apt install -y \
   python3 \
-  make clang-12 cmake git wget libc++-12-dev libc++abi-12-dev
+  make clang-13 cmake git wget libc++-13-dev libc++abi-13-dev
 
-RUN ln -s /usr/bin/clang-12 /usr/bin/clang && ln -s /usr/bin/clang++-12 /usr/bin/clang++
+RUN ln -s /usr/bin/clang-13 /usr/bin/clang && ln -s /usr/bin/clang++-13 /usr/bin/clang++
 
 WORKDIR /root/develop
 
@@ -40,13 +40,11 @@ FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-LABEL maintainer="helicsdevelopers@helics.org"
-
 # last updated 2022-05-16
 
 RUN apt update && apt install -y \
   libboost-dev \
-  clang-12 cmake make git && apt-get clean && ln -s /usr/bin/llvm-symbolizer-12 /usr/bin/llvm-symbolizer && ln -s /usr/bin/clang-12 /usr/bin/clang && ln -s /usr/bin/clang++-12 /usr/bin/clang++
+  clang-13 cmake make git && apt-get clean && ln -s /usr/bin/llvm-symbolizer-13 /usr/bin/llvm-symbolizer && ln -s /usr/bin/clang-13 /usr/bin/clang && ln -s /usr/bin/clang++-13 /usr/bin/clang++
 
 # Copy the built libraries from the builder images
 COPY --from=builder /root/develop/libcxx_asan /root/develop/libcxx_asan
@@ -61,3 +59,6 @@ ENV ASAN_CFLAGS="-fsanitize=undefined,address -stdlib=libc++ -L/root/develop/lib
 ENV MSAN_CFLAGS="-fsanitize=memory -stdlib=libc++ -L/root/develop/libcxx_msan/lib -lc++abi -I/root/develop/libcxx_msan/include -I/root/develop/libcxx_msan/include/c++/v1 -Wno-unused-command-line-argument -fno-omit-frame-pointer -g -O1 -Wl,-rpath=/root/develop/libcxx_msan/lib"
 
 ENV TSAN_CFLAGS="-fsanitize=thread -stdlib=libc++ -L/root/develop/libcxx_tsan/lib -lc++abi -I/root/develop/libcxx_tsan/include -I/root/develop/libcxx_tsan/include/c++/v1 -Wno-unused-command-line-argument -g -O1 -Wl,-rpath=/root/develop/libcxx_tsan/lib"
+
+LABEL maintainer="helicsdevelopers@helics.org"
+LABEL date="2022-05-16"
