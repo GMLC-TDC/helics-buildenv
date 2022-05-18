@@ -1,4 +1,4 @@
-FROM ubuntu:19.10 as builder
+FROM ubuntu:20.04 as builder
 
 RUN apt update && apt install -y \
   python3 \
@@ -34,7 +34,7 @@ RUN cd libcxx_tsan_build && make cxx -j${MAKE_PARALLEL:-2}
 RUN mkdir -p /root/develop/libcxx_tsan/include && cp -r /root/develop/libcxx_tsan_build/include/* /root/develop/libcxx_tsan/include/
 RUN mkdir -p /root/develop/libcxx_tsan/lib && cp -r /root/develop/libcxx_tsan_build/lib/* /root/develop/libcxx_tsan/lib/
 
-FROM ubuntu:19.10
+FROM ubuntu:20.04
 
 RUN apt update && apt install -y \
   libboost-dev \
