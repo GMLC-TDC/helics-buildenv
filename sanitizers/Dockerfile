@@ -1,10 +1,12 @@
 FROM helics/buildenv:clang9-builder as builder
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 WORKDIR /root/develop
 
 RUN apt update && apt install -y ninja-build
 
-RUN git clone https://github.com/llvm/llvm-project.git
+RUN git clone -b llvmorg-9.0.1 https://github.com/llvm/llvm-project.git
 
 # Sets the number of threads for make to use
 ARG MAKE_PARALLEL
