@@ -19,6 +19,7 @@ RUN mkdir -p /root/develop/libcxx_msan/lib && cp -r /root/develop/libcxx_msan_in
 
 # Build the ASAN libraries
 COPY  asan_suppression.txt .
+ENV ASAN_OPTIONS="detect_odr_violation=0"
 RUN mkdir libcxx_asan_build && mkdir libcxx_asan_install && cd libcxx_asan_build &&  cmake -GNinja  -S runtimes ../llvm-project/runtimes -DCMAKE_INSTALL_PREFIX=/root/develop/libcxx_asan_install -DCMAKE_BUILD_TYPE=Release -DCMAKE_CXX_FLAGS="-fsanitize-ignorelist=/root/develop/asan_suppression.txt" -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi" -DLLVM_USE_SANITIZER=Address -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
 RUN cd libcxx_asan_build && cmake --build  . -j 3 -- cxx cxxabi
 RUN cd libcxx_asan_build && ninja install-cxx install-cxxabi
