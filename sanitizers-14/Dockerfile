@@ -18,7 +18,7 @@ RUN mkdir -p /root/develop/libcxx_msan/include && cp -r /root/develop/libcxx_msa
 RUN mkdir -p /root/develop/libcxx_msan/lib && cp -r /root/develop/libcxx_msan_install/lib/* /root/develop/libcxx_msan/lib/
 
 # Build the ASAN libraries
-RUN mkdir libcxx_asan_build && mkdir libcxx_asan_install && cd libcxx_asan_build &&  cmake -GNinja  -S runtimes ../llvm-project/runtimes -DCMAKE_INSTALL_PREFIX=/root/develop/libcxx_asan_install -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi" -DCMAKE_CXX_FLAGS="-fno-common" -DCMAKE_C_FLAGS="-fno-common" -DLLVM_USE_SANITIZER=Address -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
+RUN mkdir libcxx_asan_build && mkdir libcxx_asan_install && cd libcxx_asan_build &&  cmake -GNinja  -S runtimes ../llvm-project/runtimes -DCMAKE_INSTALL_PREFIX=/root/develop/libcxx_asan_install -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi" -DLLVM_USE_SANITIZER=Address -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
 RUN cd libcxx_asan_build && cmake --build  . -j 3 -- cxx cxxabi
 RUN cd libcxx_asan_build && ninja install-cxx install-cxxabi
 
@@ -49,6 +49,7 @@ COPY helics_build_run_*.sh /root/develop/
 
 ENV ASAN_CFLAGS="-fsanitize=undefined,address -stdlib=libc++ -L/root/develop/libcxx_asan/lib -lc++abi -I/root/develop/libcxx_asan/include -I/root/develop/libcxx_asan/include/c++/v1 -Wno-unused-command-line-argument -fno-omit-frame-pointer -g -O1 -Wl,-rpath=/root/develop/libcxx_asan/lib"
 
+ENV ASAN_OPTIONS="detect_odr_violation=0"
 ENV MSAN_CFLAGS="-fsanitize=memory -stdlib=libc++ -L/root/develop/libcxx_msan/lib -lc++abi -I/root/develop/libcxx_msan/include -I/root/develop/libcxx_msan/include/c++/v1 -Wno-unused-command-line-argument -fno-omit-frame-pointer -g -O1 -Wl,-rpath=/root/develop/libcxx_msan/lib"
 
 ENV TSAN_CFLAGS="-fsanitize=thread -stdlib=libc++ -L/root/develop/libcxx_tsan/lib -lc++abi -I/root/develop/libcxx_tsan/include -I/root/develop/libcxx_tsan/include/c++/v1 -Wno-unused-command-line-argument -g -O1 -Wl,-rpath=/root/develop/libcxx_tsan/lib"
