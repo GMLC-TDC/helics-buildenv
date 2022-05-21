@@ -49,12 +49,12 @@ COPY --from=builder /root/develop/libcxx_msan /root/develop/libcxx_msan
 # Copy scripts to build and run HELICS with the sanitizers
 COPY helics_build_run_*.sh /root/develop/
 
-ENV ASAN_CFLAGS="-fsanitize=undefined,address -stdlib=libc++ -L/root/develop/libcxx_asan/lib -lc++abi -I/root/develop/libcxx_asan/include -I/root/develop/libcxx_asan/include/c++/v1 -Wno-unused-command-line-argument -fno-omit-frame-pointer -g -O1 -Wl,-rpath=/root/develop/libcxx_asan/lib"
+ENV ASAN_CFLAGS="-fsanitize=undefined,address -nostdinc++ -nostdlib++ -L/root/develop/libcxx_asan/lib -lc++ -lc++abi -I/root/develop/libcxx_asan/include -fsanitize-address-use-after-scope  -Wno-unused-command-line-argument -fno-omit-frame-pointer -g -O1 -Wl,-rpath,/root/develop/libcxx_asan/lib"
 
 ENV ASAN_OPTIONS="detect_odr_violation=0"
-ENV MSAN_CFLAGS="-fsanitize=memory -stdlib=libc++ -L/root/develop/libcxx_msan/lib -lc++abi -I/root/develop/libcxx_msan/include -I/root/develop/libcxx_msan/include/c++/v1 -Wno-unused-command-line-argument -fno-omit-frame-pointer -g -O1 -Wl,-rpath=/root/develop/libcxx_msan/lib"
+ENV MSAN_CFLAGS="-fsanitize=memory -nostdinc++ -nostdlib++ -L/root/develop/libcxx_msan/lib -lc++ -lc++abi -I/root/develop/libcxx_msan/include -I/root/develop/libcxx_msan/include/c++/v1 -Wno-unused-command-line-argument -fno-omit-frame-pointer -g -O1 -Wl,-rpath,/root/develop/libcxx_msan/lib"
 
-ENV TSAN_CFLAGS="-fsanitize=thread -stdlib=libc++ -L/root/develop/libcxx_tsan/lib -lc++abi -I/root/develop/libcxx_tsan/include -I/root/develop/libcxx_tsan/include/c++/v1 -Wno-unused-command-line-argument -g -O1 -Wl,-rpath=/root/develop/libcxx_tsan/lib"
+ENV TSAN_CFLAGS="-fsanitize=thread -nostdinc++ -nostdlib++ -L/root/develop/libcxx_tsan/lib -lc++ -lc++abi -I/root/develop/libcxx_tsan/include -I/root/develop/libcxx_tsan/include/c++/v1 -Wno-unused-command-line-argument -fno-omit-frame-pointer -g -O2 -Wl,-rpath,/root/develop/libcxx_tsan/lib"
 
 LABEL maintainer="helicsdevelopers@helics.org"
-LABEL date="2022-05-18"
+LABEL date="2022-05-21"
