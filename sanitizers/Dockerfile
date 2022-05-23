@@ -2,39 +2,41 @@ FROM helics/buildenv:clang9-builder as builder
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-RUN apt update && apt install -y python3 subversion
-
 WORKDIR /root/develop
 
-RUN svn co http://llvm.org/svn/llvm-project/llvm/trunk llvm
-RUN (cd llvm/projects && svn co http://llvm.org/svn/llvm-project/libcxx/trunk libcxx)
-RUN (cd llvm/projects && svn co http://llvm.org/svn/llvm-project/libcxxabi/trunk libcxxabi)
+RUN apt update && apt install -y ninja-build
+
+RUN git clone -b llvmorg-9.0.1 https://github.com/llvm/llvm-project.git
 
 # Sets the number of threads for make to use
 ARG MAKE_PARALLEL
 
-# Build the ASAN libraries
-RUN mkdir libcxx_asan_build && cd libcxx_asan_build &&  cmake ../llvm -DCMAKE_BUILD_TYPE=Release -DLLVM_USE_SANITIZER=Address -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_FLAGS=-stdlib=libc++
-RUN cd libcxx_asan_build && make cxx -j${MAKE_PARALLEL:-2}
-
-RUN mkdir -p /root/develop/libcxx_asan/include && cp -r /root/develop/libcxx_asan_build/include/* /root/develop/libcxx_asan/include/
-RUN mkdir -p /root/develop/libcxx_asan/lib && cp -r /root/develop/libcxx_asan_build/lib/* /root/develop/libcxx_asan/lib/
-
 # Build the Memory sanitizer libraries
-RUN mkdir libcxx_msan_build && cd libcxx_msan_build &&  cmake ../llvm -DCMAKE_BUILD_TYPE=Release -DLLVM_USE_SANITIZER=Memory -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_FLAGS=-stdlib=libc++
-RUN cd libcxx_msan_build && make cxx -j${MAKE_PARALLEL:-2}
+RUN mkdir libcxx_msan_build && cd libcxx_msan_build &&  cmake -GNinja -S runtimes ../llvm-project/runtimes -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi" -DLLVM_USE_SANITIZER=MemoryWithOrigins -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
+RUN cd libcxx_msan_build && cmake --build  . -j 3 -- cxx cxxabi
 
 RUN mkdir -p /root/develop/libcxx_msan/include && cp -r /root/develop/libcxx_msan_build/include/* /root/develop/libcxx_msan/include/
 RUN mkdir -p /root/develop/libcxx_msan/lib && cp -r /root/develop/libcxx_msan_build/lib/* /root/develop/libcxx_msan/lib/
 
+# Build the ASAN libraries
+RUN mkdir libcxx_asan_build && cd libcxx_asan_build &&  cmake -GNinja  -S runtimes ../llvm-project/runtimes -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi" -DLLVM_USE_SANITIZER=Address -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
+RUN cd libcxx_asan_build && cmake --build  . -j 3 -- cxx cxxabi
+
+RUN mkdir -p /root/develop/libcxx_asan/include && cp -r /root/develop/libcxx_asan_build/include/* /root/develop/libcxx_asan/include/
+RUN mkdir -p /root/develop/libcxx_asan/lib && cp -r /root/develop/libcxx_asan_build/lib/* /root/develop/libcxx_asan/lib/
+
 # Build the tsan libraries
-RUN mkdir libcxx_tsan_build && cd libcxx_tsan_build &&  cmake ../llvm -DCMAKE_BUILD_TYPE=Release -DLLVM_USE_SANITIZER=Thread -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_FLAGS=-stdlib=libc++
-RUN cd libcxx_tsan_build && make cxx -j${MAKE_PARALLEL:-2}
+RUN mkdir libcxx_tsan_build && cd libcxx_tsan_build &&  cmake -GNinja  -S runtimes ../llvm-project/runtimes -DCMAKE_BUILD_TYPE=Release -DLLVM_ENABLE_RUNTIMES="libcxx;libcxxabi" -DLLVM_USE_SANITIZER=Thread -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++
+RUN cd libcxx_tsan_build && cmake --build  . -j 3 -- cxx cxxabi
 
 RUN mkdir -p /root/develop/libcxx_tsan/include && cp -r /root/develop/libcxx_tsan_build/include/* /root/develop/libcxx_tsan/include/
 RUN mkdir -p /root/develop/libcxx_tsan/lib && cp -r /root/develop/libcxx_tsan_build/lib/* /root/develop/libcxx_tsan/lib/
 
 FROM helics/buildenv:clang9-builder
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# last updated 2022-05-19
 
 # Copy the built libraries from the builder images
 COPY --from=builder /root/develop/libcxx_asan /root/develop/libcxx_asan
