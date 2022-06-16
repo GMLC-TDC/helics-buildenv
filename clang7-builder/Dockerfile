@@ -1,4 +1,4 @@
-FROM ubuntu:18.04 as clang-builder7
+FROM ubuntu:20.04 as clang-builder7
 
 RUN apt update && apt install -y \
   libzmq5-dev build-essential \
@@ -10,4 +10,4 @@ RUN apt update && apt install -y \
   && ln -s /usr/bin/clang-7 /usr/bin/clang
 
 LABEL maintainer="helicsdevelopers@helics.org"
-LABEL date="2021-03-08"
+LABEL date="2022-06-16"

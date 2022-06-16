@@ -3,12 +3,12 @@ FROM ubuntu:20.04 as builder
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && apt install -y \
-  libzmq5-dev libboost-filesystem1.71-dev \
-  libboost-system1.71-dev libboost-test1.71-dev libboost-date-time1.71-dev \
-  g++-8 gcc-8 libsuitesparse-dev \
+  default-jdk libzmq5-dev libboost-filesystem1.67-dev \
+  libboost-system1.67-dev libboost-test1.67-dev libboost-date-time1.67-dev \
+  g++-8 gcc-8 mpi-default-dev libsuitesparse-dev \
   libsodium-dev libssl-dev openssl \
   cmake git wget && apt-get install -y --no-install-recommends \
-  pkg-config libboost1.71-dev make && apt-get clean && rm -rf /var/lib/apt/lists/*
+  pkg-config libboost1.67-dev make && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN rm /usr/bin/gcc && ln -s /usr/bin/gcc-8 /usr/bin/gcc \
   && ln -s /usr/bin/g++-8 /usr/bin/g++ \
@@ -17,4 +17,4 @@ RUN rm /usr/bin/gcc && ln -s /usr/bin/gcc-8 /usr/bin/gcc \
   && rm /usr/bin/gcc-ranlib && ln -s /usr/bin/gcc-ranlib-8 /usr/bin/gcc-ranlib
 
 LABEL maintainer="helicsdevelopers@helics.org"
-LABEL date="2021-03-08"
+LABEL date="2022-06-16"
