@@ -1,5 +1,7 @@
 FROM ubuntu:20.04 as clang-builder7
 
+ENV DEBIAN_FRONTEND=noninteractive
+
 RUN apt update && apt install -y \
   libzmq5-dev build-essential \
   clang-8 libc++-7-dev libc++abi-7-dev libstdc++-7-dev \
