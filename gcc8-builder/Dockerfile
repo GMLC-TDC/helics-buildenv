@@ -5,9 +5,9 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt install -y \
   default-jdk libzmq5-dev libboost-filesystem1.67-dev \
   libboost-system1.67-dev libboost-test1.67-dev libboost-date-time1.67-dev \
-  g++-8 gcc-8 mpi-default-dev libsuitesparse-dev \
+  g++-8 gcc-8 mpi mpi-default-dev libsuitesparse-dev \
   libsodium-dev libssl-dev openssl \
-  cmake git wget && apt-get install -y --no-install-recommends \
+  cmake git wget swig && apt-get install -y --no-install-recommends \
   pkg-config libboost1.67-dev make && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 RUN rm /usr/bin/gcc && ln -s /usr/bin/gcc-8 /usr/bin/gcc \
