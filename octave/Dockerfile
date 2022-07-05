@@ -1,4 +1,6 @@
-FROM ubuntu:18.04 as builder
+FROM ubuntu:20.04 as builder
+
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && apt install -y \
   libboost-dev \
@@ -12,7 +14,9 @@ RUN apt update && apt install -y --no-install-recommends libzmq5 octave liboctav
 ENV PYTHONPATH /usr/local/python
 
 # Python must be installed after the PYTHONPATH is set above for it to
-# recognize and import libhelicsSharedLib.so
+# recognize and import libhelics.so
 RUN apt install -y --no-install-recommends python3-dev \
   && apt-get clean
 
+LABEL maintainer="helicsdevelopers@helics.org"
+LABEL date="2022-07-05"
