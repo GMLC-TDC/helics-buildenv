@@ -19,3 +19,6 @@ RUN apk add --no-cache \
     suitesparse-dev \
     wget \
     zeromq-dev
+
+LABEL maintainer="helicsdevelopers@helics.org"
+LABEL date="2023-03-03"
