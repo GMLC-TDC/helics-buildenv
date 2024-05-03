@@ -6,3 +6,6 @@ RUN apk add --no-cache \
     build-base \
     cmake \
     clang
+
+LABEL maintainer="helicsdevelopers@helics.org"
+LABEL date="2024-05-03"
