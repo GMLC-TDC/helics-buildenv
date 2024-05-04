@@ -1,4 +1,4 @@
-FROM ubuntu:22.04 as clang14-builder
+FROM ubuntu:24.04 as clang14-builder
 
 ENV DEBIAN_FRONTEND=noninteractive
 
