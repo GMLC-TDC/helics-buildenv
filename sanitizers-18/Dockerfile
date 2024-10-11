@@ -39,7 +39,7 @@ FROM helics/buildenv:clang18-builder
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# last updated 2024-05-03
+# last updated 2024-10-11
 
 # Copy the built libraries from the builder images
 COPY --from=builder /root/develop/libcxx_asan /root/develop/libcxx_asan
@@ -57,4 +57,4 @@ ENV MSAN_CFLAGS="-fsanitize=memory -nostdinc++ -nostdlib++ -L/root/develop/libcx
 ENV TSAN_CFLAGS="-fsanitize=thread -nostdinc++ -nostdlib++ -L/root/develop/libcxx_tsan/lib -lc++ -lc++abi -I/root/develop/libcxx_tsan/include -I/root/develop/libcxx_tsan/include/c++/v1 -Wno-unused-command-line-argument -fno-omit-frame-pointer -g -O2 -Wl,-rpath,/root/develop/libcxx_tsan/lib"
 
 LABEL maintainer="helicsdevelopers@helics.org"
-LABEL date="2024-05-03"
+LABEL date="2024-10-11"
