@@ -1,5 +1,6 @@
 FROM ubuntu:24.10 as clang19-builder
 
+
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && apt install -y \
