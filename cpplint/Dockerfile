@@ -1,7 +1,7 @@
 FROM python
 
 LABEL maintainer="helicsdevelopers@helics.org"
-LABEL date="2024-05-03"
+LABEL date="2024-10-15"
 
-# currently version 1.6.1
+# currently version 2.0.0
 RUN pip install cpplint
