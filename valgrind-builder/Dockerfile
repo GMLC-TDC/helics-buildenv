@@ -1,5 +1,5 @@
 # Used for valgrind runs
-FROM helics/buildenv:ubuntu24.04-default-builder as builder
+FROM helics/buildenv:ubuntu26.04-default-builder AS builder
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -9,4 +9,4 @@ RUN apt update && apt install -y \
   && rm -rf /var/lib/apt/lists/*
 
 LABEL maintainer="helicsdevelopers@helics.org"
-LABEL date="2024-05-03"
+LABEL date="2026-04-24"

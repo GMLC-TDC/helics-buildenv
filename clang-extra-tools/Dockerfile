@@ -11,14 +11,9 @@ RUN apk add --no-cache \
     clang \
     clang-extra-tools \
     boost-dev \
-    boost-chrono \
-    boost-filesystem \
-    boost-system \
-    boost-date_time \
-    boost-unit_test_framework \ 
     suitesparse-dev \
     wget \
     zeromq-dev
 
 LABEL maintainer="helicsdevelopers@helics.org"
-LABEL date="2026-04-12"
+LABEL date="2026-04-24"

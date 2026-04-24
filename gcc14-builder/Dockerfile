@@ -1,10 +1,9 @@
-FROM ubuntu:24.04 as builder
+FROM ubuntu:26.04 AS builder
 
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && apt install -y \
-  default-jdk python3-dev python3-pip python3-pytest libzmq5-dev libboost-filesystem-dev \
-  libboost-system-dev libboost-test-dev libboost-date-time-dev \
+  default-jdk python3-dev python3-pip python3-pytest libzmq5-dev \
   g++-14 gcc-14 mpi-default-dev libsuitesparse-dev \
   libsodium-dev libssl-dev openssl \
   cmake git wget swig && apt-get install -y --no-install-recommends \
@@ -17,4 +16,4 @@ RUN rm /usr/bin/gcc && ln -s /usr/bin/gcc-14 /usr/bin/gcc \
   && rm /usr/bin/gcc-ranlib && ln -s /usr/bin/gcc-ranlib-14 /usr/bin/gcc-ranlib
 
 LABEL maintainer="helicsdevelopers@helics.org"
-LABEL date="2024-05-03"
+LABEL date="2026-04-24"

@@ -1,4 +1,4 @@
-FROM ubuntu:24.04 AS clang19-builder
+FROM ubuntu:26.04 AS clang19-builder
 
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -18,4 +18,4 @@ ENV CC=/usr/bin/clang
 ENV CXX=/usr/bin/clang++
 
 LABEL maintainer="helicsdevelopers@helics.org"
-LABEL date="2026-04-11"
+LABEL date="2026-04-24"

@@ -1,10 +1,10 @@
 # This Dockerfile creates an image with cppcheck2.0
 
-FROM ubuntu:24.04 as builder
+FROM ubuntu:26.04 AS builder
 
 # Installs dependencies needed for building, with headers needed for development
 ENV DEBIAN_FRONTEND=noninteractive
-ARG CPPCHECK_VERSION=2.18.0
+ARG CPPCHECK_VERSION=2.20.1
 
 RUN apt update && apt install -y \
   git g++ libz3-dev cmake libpcre3-dev python3
@@ -21,14 +21,14 @@ RUN make -j4 && make install
 
 
 # Create an image for generating HELICS interfaces
-FROM ubuntu:24.04 as Hbase
+FROM ubuntu:26.04 AS Hbase
 
 # Install the tools for building
 RUN apt update && apt install -y libz3-4 libpcre3 \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 LABEL maintainer="helicsdevelopers@helics.org"
-LABEL date="2026-04-05"
+LABEL date="2026-04-24"
 
 # Copy cppcheck to the install location
 COPY --from=builder /usr/local/share/Cppcheck /usr/local/share/Cppcheck

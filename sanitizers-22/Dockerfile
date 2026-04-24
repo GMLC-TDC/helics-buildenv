@@ -1,7 +1,7 @@
-FROM helics/buildenv:clang19-builder as builder
+FROM helics/buildenv:clang22-builder as builder
 
 WORKDIR /root/develop
-ARG LLVM_VERSION=19.1.0
+ARG LLVM_VERSION=22.1.4
 
 RUN apt update && apt install -y ninja-build
 
@@ -37,11 +37,11 @@ RUN cd libcxx_tsan_build && ninja install-cxx install-cxxabi
 RUN mkdir -p /root/develop/libcxx_tsan/include && cp -r /root/develop/libcxx_tsan_install/include/* /root/develop/libcxx_tsan/include/
 RUN mkdir -p /root/develop/libcxx_tsan/lib && cp -r /root/develop/libcxx_tsan_install/lib/* /root/develop/libcxx_tsan/lib/
 
-FROM helics/buildenv:clang19-builder
+FROM helics/buildenv:clang22-builder
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# last updated 2026-04-05
+# last updated 2026-04-24
 
 # Copy the built libraries from the builder images
 COPY --from=builder /root/develop/libcxx_asan /root/develop/libcxx_asan
