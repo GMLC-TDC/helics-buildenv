@@ -2,7 +2,7 @@ FROM ubuntu:26.04 AS builder
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-ENV PYTHONPATH /usr/local/python
+ENV PYTHONPATH=/usr/local/python
 
 RUN apt update && apt install -y \
   default-jdk python3-full python3-dev python3-pip libzmq5-dev \
