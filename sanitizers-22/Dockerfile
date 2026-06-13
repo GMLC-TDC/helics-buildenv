@@ -1,7 +1,7 @@
 FROM helics/buildenv:clang22-builder as builder
 
 WORKDIR /root/develop
-ARG LLVM_VERSION=22.1.4
+ARG LLVM_VERSION=22.1.7
 
 RUN apt update && apt install -y ninja-build
 
