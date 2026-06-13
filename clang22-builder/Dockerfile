@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt update && apt install -y \
   default-jdk python3-dev python3-pip python3-pytest libzmq5-dev build-essential \
-  clang-22 clang-tidy-22 libc++-22-dev libc++abi-22-dev libstdc++-14-dev \
+  clang-22 clang-tidy-22 libclang-22-dev libc++-22-dev libc++abi-22-dev libstdc++-14-dev \
   libsodium-dev libssl-dev openssl libsuitesparse-dev \
   cmake git wget swig mpich libboost-dev ca-certificates \
   && apt-get clean && rm -rf /var/lib/apt/lists/* \
@@ -18,4 +18,4 @@ ENV CC=/usr/bin/clang
 ENV CXX=/usr/bin/clang++
 
 LABEL maintainer="helicsdevelopers@helics.org"
-LABEL date="2026-04-24"
+LABEL date="2026-06-13"
