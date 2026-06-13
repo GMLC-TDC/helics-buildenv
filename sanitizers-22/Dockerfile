@@ -41,7 +41,7 @@ FROM helics/buildenv:clang22-builder
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# last updated 2026-04-24
+# last updated 2026-06-13
 
 # Copy the built libraries from the builder images
 COPY --from=builder /root/develop/libcxx_asan /root/develop/libcxx_asan
@@ -60,4 +60,4 @@ ENV TSAN_CFLAGS="-fsanitize=thread -nostdinc++ -nostdlib++ -L/root/develop/libcx
 
 
 LABEL maintainer="helicsdevelopers@helics.org"
-LABEL date="2026-04-05"
+LABEL date="2026-06-13"
